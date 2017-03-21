@@ -1,6 +1,7 @@
 package com.example.eduard.cryptoprojectnew.libraryChain;
 
-import javafx.util.Pair;
+
+import android.util.Pair;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,16 +11,17 @@ import java.util.ArrayList;
  */
 public class Blockchain
 {
-    private ArrayList<Pair<Block, BigInteger>> Chain;
+    private ArrayList<Pair<Block, Object>> Chain;
 
     public Blockchain()
     {
-        Chain = new ArrayList<Pair<Block, BigInteger>>(); // block-signature pairs
+        Chain = new ArrayList<>(); // block-signature pairs
     }
 
     public Block GetCurrentBlock()
     {
-        return Chain.get(Chain.size()-1).getKey();
+        return Chain.get(Chain.size()-1).first;
+        //TODO (Eduard) check with Joe if that works
     }
 
     public ArrayList<Pair<Block, BigInteger>> ReadChain()
@@ -41,11 +43,11 @@ public class Blockchain
         if(block.Length() >= 50)
         {
             BigInteger signature = rsa.sign(block);
-            Pair<Block, BigInteger> signedBlock = new Pair<Block, BigInteger>(block, signature);
+            Pair<Block, Object> signedBlock = new Pair<Block, Object>(block, signature);
 
             Chain.remove(block);
             Chain.add(signedBlock);
-            Chain.add(new Pair<Block, BigInteger>(new Block(signature), null));
+            Chain.add(new Pair<>(new Block(signature), null));
 
             block = GetCurrentBlock();
         }

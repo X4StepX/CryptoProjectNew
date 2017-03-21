@@ -1,10 +1,7 @@
 package com.example.eduard.cryptoprojectnew.libraryChain;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-/**
- * Created by joerimmer on 2017-03-06.
- */
+import java.text.SimpleDateFormat;
+
 public class Transaction
 {
     private String BookID;
