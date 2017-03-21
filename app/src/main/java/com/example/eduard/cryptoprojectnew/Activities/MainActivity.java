@@ -1,5 +1,6 @@
 package com.example.eduard.cryptoprojectnew.Activities;
 
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,8 +25,14 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
     public Button mCancel;
     public Button mConfirm;
     public EditText mBookName;
-
+    public EditText mBookOwner;
     BookFragment booksFragment;
+
+
+
+    Blockchain chain = new Blockchain();//When program starts create a chain
+    RSA key = new RSA(2051);//Add the RSA key to encrypt
+    int id = 0;
 
 
     public DBHandler dbHandler;
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
                 AddBook(view);
             }
         });
+
+
     }
 
     @Override
@@ -74,8 +83,13 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         final View mView = LayoutInflater.from(MainActivity.this).inflate(R.layout.add_book, null);
 
         mBookName = (EditText)mView.findViewById(R.id.BookName);
+        mBookOwner = (EditText)mView.findViewById(R.id.BookOwner);//Add the owner of the book
         mCancel = (Button)mView.findViewById(R.id.cancelButton);
         mConfirm = (Button)mView.findViewById(R.id.confirmButton);
+        id++;//everytime a new book gets created increment the id.
+
+        final Transaction tx = new Transaction(mBookOwner.toString(),id);//Add the owner to the book and book id
+
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         mBuilder.setView(mView);
@@ -84,8 +98,10 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHandler.InsertBook(String.valueOf(mBookName.getText()));
-                booksFragment.updateBooks();
+                chain.AddTransaction(tx,key);
+
+                //dbHandler.InsertBook(String.valueOf(mBookName.getText()));
+                //booksFragment.updateBooks();
                 dialog.dismiss();
             }
         });

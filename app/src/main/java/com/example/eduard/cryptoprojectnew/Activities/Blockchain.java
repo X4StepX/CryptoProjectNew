@@ -1,8 +1,9 @@
-package com.example.eduard.cryptoprojectnew.libraryChain;
+package com.example.eduard.cryptoprojectnew.Activities;
 
 
 import android.annotation.TargetApi;
 import android.util.Pair;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 

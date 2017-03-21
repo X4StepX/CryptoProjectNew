@@ -1,5 +1,6 @@
 package com.example.eduard.cryptoprojectnew.Activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
@@ -38,6 +39,7 @@ public class BookInfoActivity extends AppCompatActivity {
     }
 
     @Override
+    @TargetApi(16)
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
