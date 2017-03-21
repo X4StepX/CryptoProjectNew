@@ -1,12 +1,15 @@
 package com.example.eduard.cryptoprojectnew.Activities;
 
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -19,6 +22,9 @@ import com.example.eduard.cryptoprojectnew.Database.DBHandler;
 import com.example.eduard.cryptoprojectnew.Fragments.BookFragment;
 import com.example.eduard.cryptoprojectnew.Model.Book;
 import com.example.eduard.cryptoprojectnew.R;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BookFragment.OnListFragmentInteractionListener {
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
 
         return super.onOptionsItemSelected(item);
     }
-
+    @TargetApi(5)
     public void AddBook(View view){
         final View mView = LayoutInflater.from(MainActivity.this).inflate(R.layout.add_book, null);
 
@@ -88,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         mConfirm = (Button)mView.findViewById(R.id.confirmButton);
         id++;//everytime a new book gets created increment the id.
 
-        final Transaction tx = new Transaction(mBookOwner.toString(),id);//Add the owner to the book and book id
+        //Add the owner to the book and book id
 
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -98,14 +104,24 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Transaction tx = new Transaction(String.valueOf(mBookOwner.getText()),id);
                 chain.AddTransaction(tx,key);
 
                 //dbHandler.InsertBook(String.valueOf(mBookName.getText()));
                 //booksFragment.updateBooks();
+                ArrayList<Pair<Block, BigInteger>> read = chain.ReadChain();
 
+                String data,date;
+                int id1;
+                data = read.get(0).first.getTransactions().get(0).first.getOwner();
+                id1 = read.get(0).first.getTransactions().get(0).first.getId();
+                date = read.get(0).first.getTransactions().get(0).first.getDate();
+                Log.d("Block Chain", data + id1 + date);
                 dialog.dismiss();
             }
         });
+
+
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override

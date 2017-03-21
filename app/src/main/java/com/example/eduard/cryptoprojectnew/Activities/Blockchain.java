@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Blockchain
 {
-    private ArrayList<Pair<Block, Object>> Chain;
+    public ArrayList<Pair<Block, Object>> Chain;
 
     public Blockchain()
     {
