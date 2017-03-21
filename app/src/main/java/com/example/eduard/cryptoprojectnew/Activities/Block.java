@@ -27,7 +27,9 @@ public class Block
         BigInteger signature = rsa.sign(tx);
         Transactions.add(new Pair<>(tx, signature));
     }
-
+    public  ArrayList<Pair<Transaction, BigInteger>> getTransactions(){
+        return Transactions;
+    }
     public int Length()
     {
         return Transactions.size();

@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
 
                 //dbHandler.InsertBook(String.valueOf(mBookName.getText()));
                 //booksFragment.updateBooks();
+
                 dialog.dismiss();
             }
         });
