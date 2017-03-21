@@ -1,7 +1,8 @@
 package com.example.eduard.cryptoprojectnew.libraryChain;
-
-import javafx.util.Pair;
 import java.math.BigInteger;
+
+import android.annotation.TargetApi;
+import android.util.Pair;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ public class Block
         this.PreviousBlockSignature = PreviousBlockSignature;
         Transactions = new ArrayList<Pair<Transaction, BigInteger>>();
     }
-
+    @TargetApi(5)
     public void AddTransaction(Transaction tx, RSA rsa)
     {
         BigInteger signature = rsa.sign(tx);

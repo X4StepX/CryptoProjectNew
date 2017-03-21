@@ -1,6 +1,7 @@
 package com.example.eduard.cryptoprojectnew.libraryChain;
 
 
+import android.annotation.TargetApi;
 import android.util.Pair;
 
 import java.math.BigInteger;
@@ -17,7 +18,7 @@ public class Blockchain
     {
         Chain = new ArrayList<>(); // block-signature pairs
     }
-
+    @TargetApi(5)
     public Block GetCurrentBlock()
     {
         return Chain.get(Chain.size()-1).first;
@@ -28,7 +29,7 @@ public class Blockchain
     {
         return (ArrayList<Pair<Block,BigInteger>>) Chain.clone();
     }
-
+    @TargetApi(5)
     public void AddTransaction(Transaction tx, RSA rsa)
     {
         // if chain is empty, add a fresh block

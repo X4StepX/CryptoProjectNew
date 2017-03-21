@@ -1,37 +1,43 @@
 package com.example.eduard.cryptoprojectnew.libraryChain;
-
-import java.text.SimpleDateFormat;
+import android.annotation.TargetApi;
+import android.text.format.Time;
 
 public class Transaction
 {
+
     private String BookID;
     private String Borrower;
-    private LocalDateTime CheckedOutTimestamp;
-    private LocalDateTime DueByTimestamp;
+    private String date;
+    /**
+     * Get current time in human-readable form.
+     * @return current time as a string.
+     */
+    @TargetApi(3)
+    public static String getNow() {
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        Time now = new Time();
+        now.setToNow();
+        String sTime = now.format("%Y_%m_%d %T");
+        return sTime;
+    }
 
-    public Transaction(String BookID, String Borrower, LocalDateTime CheckedOutTimestamp, LocalDateTime DueByTimestamp)
+    public Transaction(String BookID, String Borrower) // have to add datatime and due date
     {
         this.BookID = BookID;
         this.Borrower = Borrower;
-        this.CheckedOutTimestamp = CheckedOutTimestamp;
-        this.DueByTimestamp = DueByTimestamp;
+        date = getNow();
     }
 
     public String getBookID() {
         return BookID;
     }
 
-    public String getBorrower(){
+        public String getBorrower(){
         return Borrower;
     }
 
     public String getCheckedOutTimestamp(){//Return the Checked out timestamp
-        return CheckedOutTimestamp.format(formatter); //convert to string and return
+        return date; //convert to string and return
     }
 
-    public String getDueByTimestamp() {//return due by timestamp
-        return DueByTimestamp.format(formatter); //convert to string and return
-    }
 }
