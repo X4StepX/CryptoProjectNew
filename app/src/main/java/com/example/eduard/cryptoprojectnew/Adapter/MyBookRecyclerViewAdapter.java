@@ -68,7 +68,8 @@ public class MyBookRecyclerViewAdapter extends RecyclerView.Adapter<MyBookRecycl
                 }
                 Intent intent = new Intent(_context, BookInfoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("bookId", holder.mBook.getBookId());
+                intent.putExtra("bookId", mBooks.get(position).getBookId());
+
                 _context.startActivity(intent);
             }
         });

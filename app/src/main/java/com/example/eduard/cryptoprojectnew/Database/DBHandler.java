@@ -61,7 +61,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ArrayList<Book> bookList = new ArrayList<Book>();
         //select all query
         String selectQuery = "SELECT * FROM " + TABLE_BOOK;
-        // return farm list
+        // return Book list
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -75,9 +75,29 @@ public class DBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        // return farm list
+        // return book list
 
         return bookList;
+    }
+
+    public Book getBook(int BookId){
+        Book book = new Book();
+
+        String selectQuery = "SELECT * FROM " + TABLE_BOOK + " WHERE " + COL_ID + " = " + BookId + "" ;
+        // return book list
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                book.setBookId(cursor.getInt(0));
+                book.setBookName(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return book
+
+        return book;
     }
 
     public void InsertBook(String bookName) {

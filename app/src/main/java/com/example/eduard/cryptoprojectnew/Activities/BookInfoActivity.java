@@ -8,15 +8,27 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.eduard.cryptoprojectnew.Database.DBHandler;
+import com.example.eduard.cryptoprojectnew.Model.Book;
 import com.example.eduard.cryptoprojectnew.R;
 
 public class BookInfoActivity extends AppCompatActivity {
+    public int bookId;
+    public DBHandler dbHandler;
+    public Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Book History");
         setContentView(R.layout.activity_book_info);
+        dbHandler = new DBHandler(this);
+        Intent intent = getIntent();
+        bookId = intent.getExtras().getInt("bookId");
+        book = dbHandler.getBook(bookId);
+
+        setTitle(book.getBookName() + " History");
     }
     @Override
     public void onBackPressed() {
