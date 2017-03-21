@@ -53,6 +53,10 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void DeleteBook(int BookId){
+        db.execSQL("DELETE FROM " + TABLE_BOOK + " WHERE " + COL_ID + " = " + BookId + "");
+    }
+
     public ArrayList<Book> getAllBooks() {
         ArrayList<Book> bookList = new ArrayList<Book>();
         //select all query

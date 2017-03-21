@@ -6,7 +6,7 @@
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/book_card_view"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_margin="3dp"
         card_view:cardCornerRadius="1dp"
         card_view:elevation="1dp">
@@ -17,23 +17,30 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/BookLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/bookId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:textAppearance="?attr/textAppearanceListItem" />
 
                 <TextView
                     android:id="@+id/bookName"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
                     android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/BookItemDelete"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="Delete" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
