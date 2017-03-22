@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity implements BookFragment.OnLi
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Transaction tx = new Transaction(String.valueOf(mBookOwner.getText()),id);
+                Transaction tx = new Transaction(String.valueOf(mBookOwner.getText()),String.valueOf(mBookOwner.getText()),id);
                 chain.AddTransaction(tx,key);
 
-                //dbHandler.InsertBook(String.valueOf(mBookName.getText()));
-                //booksFragment.updateBooks();
+                booksFragment.updateBooks();
+
                 ArrayList<Pair<Block, BigInteger>> read = chain.ReadChain();
 
                 String data,date;

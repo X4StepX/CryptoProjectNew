@@ -6,15 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.eduard.cryptoprojectnew.Activities.Block;
 import com.example.eduard.cryptoprojectnew.Adapter.MyBookRecyclerViewAdapter;
 import com.example.eduard.cryptoprojectnew.Database.DBHandler;
 import com.example.eduard.cryptoprojectnew.Model.Book;
 import com.example.eduard.cryptoprojectnew.R;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class BookFragment extends Fragment {
@@ -28,7 +31,7 @@ public class BookFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    public ArrayList<Book> bookList = new ArrayList<>();
+    public ArrayList<Pair<Block, BigInteger>> bookList;
 
     public MyBookRecyclerViewAdapter myBookRecyclerViewAdapter;
 
@@ -59,7 +62,7 @@ public class BookFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            getAllBooks();
+            //getAllBooks();
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             myBookRecyclerViewAdapter = new MyBookRecyclerViewAdapter(getContext(), bookList, mListener);
             recyclerView.setAdapter(myBookRecyclerViewAdapter);
@@ -80,12 +83,12 @@ public class BookFragment extends Fragment {
         }
     }
 
-    public void getAllBooks(){
+    /*public void getAllBooks(){
         bookList = dbHandler.getAllBooks();
     }
-
-    public void updateBooks(){
-        ArrayList<Book> newBookList = dbHandler.getAllBooks();
+*/
+    public void updateBooks(ArrayList<Pair<Block, BigInteger>> read){//arrayb list
+        ArrayList<Pair<Block, BigInteger>> newBookList = read;
         myBookRecyclerViewAdapter.updateDate(newBookList);
     }
 

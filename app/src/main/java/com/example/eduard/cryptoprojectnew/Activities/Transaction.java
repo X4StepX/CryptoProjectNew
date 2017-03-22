@@ -9,8 +9,8 @@ public class Transaction {
     private String BookID;
     private String date;
     private String BookOwner;
+    private String BookName;
     private int id;
-
     /**
      * Get current time in human-readable form.
      *
@@ -24,30 +24,28 @@ public class Transaction {
         String sTime = now.format("%Y_%m_%d %T");
         return sTime;
     }
-
-    public Transaction(String BookOwner, int id){
+    public Transaction(String BookOwner,String BookName, int id){
         date = getNow();
         this.BookOwner = BookOwner;
         this.id = id;
+        this.BookName = BookName;
     }
-
     public String getBookID() {
         return BookID;
     }
-
     public String getOwner(){
         return BookOwner;
     }
-
     public String getDate(){
         return date;
     }
-
     public int getId(){
         return id;
     }
-
     public void addBookID(String id){
         BookID = id;
+    }
+    public String getBookName(){
+        return BookName;
     }
 }
